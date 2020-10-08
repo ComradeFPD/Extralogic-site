@@ -7,11 +7,23 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /**
+     * Display all forms
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getIndex()
     {
         return response()->view('forms.index');
     }
 
+    /**
+     * Display selected form
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getShow($id)
     {
         return response()->view('forms.form', [
@@ -21,6 +33,11 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * Display page for create form
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getCreate()
     {
         $faker = Factory::create('ru');
