@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use Faker\Factory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function getIndex()
     {
-        $this->middleware('auth');
+        return response()->view('forms.index');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function getShow($id)
     {
-        return view('home');
+        return response()->view('forms.form', [
+            'isCreate' => false,
+            'id' => $id,
+            'uid' => null,
+        ]);
+    }
+
+    public function getCreate()
+    {
+        $faker = Factory::create('ru');
+        return response()->view('forms.form', [
+            'isCreate' => true,
+            'uid' => $faker->unique()->uuid,
+            'id' => null
+        ]);
     }
 }
